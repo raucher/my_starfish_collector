@@ -9,7 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class StarfishCollectorAlpha extends Game {
+public class StarfishCollectorAlpha extends Game
+{
     SpriteBatch batch;
 
     Texture oceanTexture;
@@ -18,11 +19,11 @@ public class StarfishCollectorAlpha extends Game {
     boolean win = false;
 
     // TURTLE
-    Texture turtleTexture;
-    Rectangle turtleRectangle;
-    float turtleX;
-    float turtleY;
-    int turtleSpeed = 3;
+    private Texture turtleTexture;
+    private Rectangle turtleRectangle;
+    private float turtleX;
+    private float turtleY;
+    private int turtleSpeed = 3;
 
     // STARFISH
     Texture starfishTexture;
@@ -31,7 +32,8 @@ public class StarfishCollectorAlpha extends Game {
     float starfishY;
 
     @Override
-    public void create () {
+    public void create()
+    {
         batch = new SpriteBatch();
 
         turtleTexture = new Texture("turtle-1.png");
@@ -51,8 +53,8 @@ public class StarfishCollectorAlpha extends Game {
     }
 
     @Override
-    public void render () {
-
+    public void render()
+    {
         // USER INPUT HANDLING
         processUserInput();
 
@@ -66,48 +68,60 @@ public class StarfishCollectorAlpha extends Game {
         batch.begin();
 
         // OCEAN
-        batch.draw(oceanTexture, 0 ,0);
+        batch.draw(oceanTexture, 0, 0);
 
         // STARFISH
-        if (!win) {
+        if (!win)
+        {
             batch.draw(starfishTexture, starfishX, starfishY);
-        } else {
-            batch.draw(winMessageTexture, 175, 300);
         }
 
         // TURTLE
         batch.draw(turtleTexture, turtleX, turtleY);
 
+        // Game Messages
+        if (win)
+        {
+            batch.draw(winMessageTexture, 175, 300);
+        }
+
         batch.end();
     }
 
-    private void updateGameState() {
+    private void updateGameState()
+    {
         turtleRectangle.setPosition(turtleX, turtleY);
 
-        if (turtleRectangle.overlaps(starfishRectangle)) {
+        if (turtleRectangle.overlaps(starfishRectangle))
+        {
             win = true;
         }
 
     }
 
-    private void processUserInput() {
-
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+    private void processUserInput()
+    {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+        {
             turtleX -= turtleSpeed;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+        {
             turtleX += turtleSpeed;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if (Gdx.input.isKeyPressed(Input.Keys.UP))
+        {
             turtleY += turtleSpeed;
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+        {
             turtleY -= turtleSpeed;
         }
     }
 
     @Override
-    public void dispose () {
+    public void dispose()
+    {
         batch.dispose();
         turtleTexture.dispose();
         starfishTexture.dispose();
